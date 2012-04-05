@@ -10,7 +10,7 @@ var express = require('express'),
   updateCounter;
 
 timer = new countdown.CountdownTimer({
-  seconds: 5,
+  seconds: 30,
   onTick: function(hour, minute, second) {
     updateCounter(hour, minute, second);
   },
@@ -20,7 +20,11 @@ timer = new countdown.CountdownTimer({
 });
 
 updateCounter = function(hour, minute, second) {
-  console.log(hour + ':' + minute + ':' + second);
+  console.log('Antes: ' + hour + ':' + minute + ':' + second);
+  if (everyone.now.receberMensagem) {
+    everyone.now.receberMensagem('This is an update', hour + ':' + minute + ':' + second);
+  }
+  console.log('Depois: ' + hour + ':' + minute + ':' + second);
 }
 
 timer.start();
